@@ -3,49 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DailyNetwork | Live</title>
+    <title>My Daily Updates & Posts</title>
     <style>
-        body {
-            background-color: #0f0f12;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .container {
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
-            border: 1px solid #2f2f35;
-            padding: 40px;
-            border-radius: 12px;
-            background: #16161a;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #00d2ff;
-            margin-bottom: 10px;
+
+        header h1 {
             font-size: 2.5rem;
+            margin-bottom: 10px;
         }
-        p {
-            color: #a0a0ab;
+
+        header p {
             font-size: 1.1rem;
+            opacity: 0.9;
         }
-        .badge {
-            background-color: #00ff87;
-            color: #000;
-            padding: 5px 12px;
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Create New Post Section */
+        .create-post {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .create-post h3 {
+            margin-bottom: 15px;
+            color: #764ba2;
+        }
+
+        .create-post textarea {
+            width: 100%;
+            height: 80px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .create-post textarea:focus {
+            border-color: #764ba2;
+        }
+
+        .create-post button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .create-post button:hover {
+            background: #5a3782;
+        }
+
+        /* Feed Section */
+        .feed-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #444;
+            border-left: 5px solid #764ba2;
+            padding-left: 10px;
+        }
+
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .post-date {
+            background: #eef2f7;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.8rem;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4px 20px;
+            margin-top: 5px;
+            color: #777;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
+
+    <header>
+        <h1>My Daily Journal</h1>
+        <p>Welcome to my daily thoughts, updates, and learning journey!</p>
+    </header>
+
     <div class="container">
-        <h1>DAILYNETWORK</h1>
-        <p>Hello World! Our video network project is officially live.</p>
-        <span class="badge">SYSTEM ONLINE</span>
+        
+        <div class="create-post">
+            <h3>✍️ Add Today's Post</h3>
+            <textarea id="postInput" placeholder="What's happening today? Type here..."></textarea>
+            <button onclick="addNewPost()">Publish Post</button>
+        </div>
+
+        <h2 class="feed-title">Recent Updates</h2>
+        
+        <div class="post-list" id="postContainer">
+            
+            </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 My Daily Post Website. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Array of 40 sample daily updates to look realistic
+        const dummyPosts = [
+            "Today marks day 40 of consistent hard work! Built a brand new layout.",
+            "Learnt about optimization and caching today. Feels great to improve speed.",
+            "Refactoring some old projects today. Clean code is happy code!",
+            "Had an amazing discussion with a fellow developer about the future of tech.",
+            "Explored UI/UX micro-interactions today. Small details make a huge difference.",
+            "Spent the morning debugging a tricky layout issue, finally fixed it!",
+            "Day 34: Working on responsive designs. Testing on multiple screen sizes.",
+            "Reading a fascinating book on software architecture. Highly recommend it.",
+            "Focused heavily on CSS Grid and modern layouts today. Very powerful stuff.",
+            "Took a small break today to refresh, mental health and rest are equally crucial.",
+            "Woke up early, hit the gym, and wrote 100 lines of clean, structured code.",
+            "Automated a boring repetitive task today using a quick custom script.",
+            "Started learning a new CSS framework today. The learning curve is smooth.",
+            "Fixed 5 major bugs that were bothering me all week. Feels like a win!",
+            "Designed a beautiful dark mode toggle for my upcoming portfolio site.",
+            "Day 25: Consistency is key. Even on slow days, progress is progress.",
+            "Explored API integration and handled async data streams like a pro today.",
+            "Set up a clean Git workflow for my local repositories. Version control is life.",
+            "Drafting some new content ideas for the upcoming week. Stay tuned!",
+            "Played around with color palettes. Opting for minimalistic pastel tones.",
+            "Celebrating Day 20! Thank you to everyone checking out my daily updates.",
+            "Optimized image assets today, drastically reducing page load times.",
+            "Wrote a comprehensive guide on modern flexbox layouts. Knowledge sharing!",
+            "Cleaned up my desktop and workstation. A clear space leads to a clear mind.",
+            "Encountered a weird bug today, but stack overflow came to the rescue as usual.",
+            "Experimented with new typography. Typography dictates the mood of a site.",
+            "Spent the afternoon analyzing web accessibility guidelines (WCAG). Important stuff.",
+            "Day 13: Time flies when you are having fun building cool digital things.",
+            "Successfully deployed my first testing server. Smooth sailings ahead.",
+            "Learning JavaScript array methods today: map, filter, and reduce are lifesavers.",
+            "Sketched out a rough wireframe for a SaaS product idea. Brainstorming phase.",
+            "Focused heavily on database normalization concepts today. Back to basics.",
+            "Woke up with an incredible burst of creativity and coded for 4 hours straight.",
+            "Configuring environment variables and securing API keys today.",
+            "Day 6: Building momentum. The daily routine is starting to feel natural.",
+            "Had a great cup of coffee and solved a challenging coding puzzle online.",
+            "Setting up the foundational folder structures for my major upcoming projects.",
+            "Diving deep into semantic HTML. Writing markup that search engines love.",
+            "Planning out my schedule for the entire month. Organization is everything.",
+            "Day 1: Officially starting my daily update log today. Excited for the journey ahead!"
+        ];
+
+        const container = document.getElementById('postContainer');
+
+        // Function to load the 40 posts automatically
+        function loadInitialPosts() {
+            let baseDate = new Date();
+            
+            dummyPosts.forEach((content, index) => {
+                // Generates consecutive past dates for each post
+                let postDate = new Date();
+                postDate.setDate(baseDate.getDate() - index);
+                
+                const dateString = postDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+
+                const postHTML = `
+                    <div class="post-card">
+                        <div class="post-meta">
+                            <span class="post-date">📅 ${dateString}</span>
+                            <span>Post #${40 - index}</span>
+                        </div>
+                        <div class="post-content">
+                            ${content}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += postHTML;
+            });
+        }
+
+        // Function to add a NEW post from the input text box
+        function addNewPost() {
+            const input = document.getElementById('postInput');
+            const text = input.value.trim();
+
+            if (text === "") {
+                alert("Please write something before publishing!");
+                return;
+            }
+
+            const today = new Date();
+            const dateString = today.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+
+            // Count current total posts to assign correct post number
+            const currentPostCount = container.children.length + 1;
+
+            const newPostHTML = `
+                <div class="post-card" style="border-left: 4px solid #667eea; animation: fadeIn 0.5s;">
+                    <div class="post-meta">
+                        <span class="post-date" style="background: #667eea; color: white;">📅 Today (${dateString})</span>
+                        <span>Post #${currentPostCount}</span>
+                    </div>
+                    <div class="post-content">
+                        <strong>${text}</strong>
+                    </div>
+                </div>
+            `;
+
+            // Insert new post at the top of the feed
+            container.insertAdjacentHTML('afterbegin', newPostHTML);
+            
+            // Clear input box
+            input.value = "";
+        }
+
+        // Initialize the 40 posts on page load
+        window.onload = loadInitialPosts;
+    </script>
 </body>
+</html>
