@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ContentFlow · Pro Dashboard</title>
+  <title>Pulse · client content hub</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -11,165 +11,173 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background: #f4f7fc;
+      background: #f1f5f9;
       display: flex;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1.2rem;
     }
 
-    .dashboard {
-      max-width: 1400px;
+    .app {
+      max-width: 1440px;
       width: 100%;
-      background: white;
-      border-radius: 40px 40px 30px 30px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      background: #ffffff;
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0,0,0,0.04);
+      transition: all 0.2s;
       overflow: hidden;
-      transition: all 0.2s ease;
     }
 
-    /* header */
-    .header {
-      padding: 1.8rem 2.5rem;
-      background: linear-gradient(145deg, #ffffff 0%, #fafcff 100%);
-      border-bottom: 1px solid rgba(0,0,0,0.03);
+    /* ----- header / nav ----- */
+    .top-bar {
+      padding: 1.6rem 2.8rem;
+      background: #ffffff;
+      border-bottom: 1px solid #eef2f6;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1rem 2rem;
     }
 
-    .logo-area h1 {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand i {
+      font-size: 2rem;
+      color: #2563eb;
+      background: #eef4ff;
+      padding: 0.4rem;
+      border-radius: 18px;
+    }
+
+    .brand h1 {
       font-size: 1.9rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #1e293b, #2d3b52);
+      background: linear-gradient(145deg, #0b1e33, #1f3a5f);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    .logo-area i {
-      color: #3b82f6;
-      font-size: 2rem;
-    }
-
-    .badge-total {
-      background: #eef2ff;
-      padding: 0.5rem 1.2rem;
-      border-radius: 100px;
+    .stats-pill {
+      background: #f8fafc;
+      padding: 0.45rem 1.4rem;
+      border-radius: 60px;
       font-size: 0.9rem;
       font-weight: 600;
       color: #1e293b;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+      border: 1px solid #e9edf2;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .badge-total i {
-      color: #3b82f6;
-      margin-right: 6px;
+    .stats-pill i {
+      color: #2563eb;
     }
 
-    .stats-mini {
+    .stats-pill span {
+      background: #e6edf8;
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      margin-left: 4px;
+    }
+
+    .meta-links {
       display: flex;
       gap: 1.8rem;
       color: #475569;
-    }
-
-    .stats-mini span {
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    .stats-mini i {
-      color: #3b82f6;
-      width: 20px;
+    .meta-links i {
+      margin-right: 6px;
+      color: #2563eb;
+      width: 18px;
     }
 
-    /* filter / sort bar */
-    .toolbar {
-      padding: 1rem 2.5rem;
-      background: #f8fafc;
-      border-bottom: 1px solid #e9edf2;
+    /* ----- filter bar ----- */
+    .filter-bar {
+      padding: 0.8rem 2.8rem;
+      background: #fafcff;
+      border-bottom: 1px solid #eef2f6;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 0.8rem 1.5rem;
+      gap: 0.6rem 1.2rem;
     }
 
-    .toolbar-left {
+    .filter-left {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       flex-wrap: wrap;
     }
 
-    .toolbar-left i {
-      color: #64748b;
-      font-size: 0.9rem;
-    }
-
-    .date-range {
+    .date-chip {
       background: white;
-      padding: 0.25rem 1rem;
-      border-radius: 30px;
-      border: 1px solid #e2e8f0;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #1e293b;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .view-options {
-      display: flex;
-      gap: 0.2rem;
-      background: white;
-      padding: 0.2rem;
+      padding: 0.2rem 1.2rem;
       border-radius: 40px;
       border: 1px solid #e2e8f0;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #0b1e33;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .view-options button {
+    .view-toggle {
+      display: flex;
+      background: white;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      padding: 0.15rem;
+    }
+
+    .view-toggle button {
       background: transparent;
       border: none;
-      padding: 0.3rem 0.9rem;
+      padding: 0.3rem 1rem;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: #64748b;
       cursor: pointer;
-      transition: all 0.1s;
+      transition: 0.1s;
     }
 
-    .view-options button.active {
+    .view-toggle button.active {
       background: #1e293b;
       color: white;
     }
 
-    /* masonry grid */
+    /* ----- grid ----- */
     .post-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.8rem;
-      padding: 2rem 2.5rem 2.8rem;
+      gap: 2rem;
+      padding: 2.2rem 2.8rem 2.8rem;
     }
 
     /* card */
     .post-card {
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0,0,0,0.03);
-      border: 1px solid #f0f3f7;
-      transition: all 0.2s ease;
+      background: #ffffff;
+      border-radius: 28px;
+      border: 1px solid #edf2f9;
+      box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -177,12 +185,12 @@
     }
 
     .post-card:hover {
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
-      border-color: #d9e2ef;
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 24px 40px -16px rgba(0, 20, 60, 0.12);
+      border-color: #cddcec;
     }
 
-    .card-media {
+    .media-box {
       width: 100%;
       aspect-ratio: 16 / 10;
       background: #eef2f6;
@@ -193,71 +201,71 @@
       overflow: hidden;
     }
 
-    .card-media img, .card-media video {
+    .media-box img, .media-box video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .card-media i {
-      font-size: 3.2rem;
+    .media-box i {
+      font-size: 3rem;
       color: #94a3b8;
-      opacity: 0.6;
+      opacity: 0.5;
     }
 
-    .card-content {
-      padding: 1.2rem 1.4rem 1.4rem;
+    .card-body {
+      padding: 1.2rem 1.4rem 0.8rem;
       flex: 1;
     }
 
-    .card-meta {
+    .card-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 0.6rem;
     }
 
-    .post-type-badge {
-      background: #eef2ff;
-      padding: 0.2rem 0.9rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 600;
+    .type-badge {
+      background: #eef4ff;
+      padding: 0.15rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.65rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
       color: #2563eb;
     }
 
-    .post-type-badge.video { background: #fce9f0; color: #b91c5c; }
-    .post-type-badge.photo { background: #e0f2fe; color: #0369a1; }
-    .post-type-badge.text  { background: #e6f7e6; color: #166534; }
+    .type-badge.video { background: #fce7f0; color: #b91c5c; }
+    .type-badge.photo { background: #dbeafe; color: #0369a1; }
+    .type-badge.text  { background: #dcfce7; color: #166534; }
 
-    .timestamp {
-      font-size: 0.75rem;
+    .time-stamp {
+      font-size: 0.7rem;
       font-weight: 500;
       color: #64748b;
       background: #f1f4f9;
       padding: 0.2rem 0.9rem;
-      border-radius: 30px;
+      border-radius: 40px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .timestamp i {
-      font-size: 0.7rem;
-      color: #3b82f6;
+    .time-stamp i {
+      font-size: 0.65rem;
+      color: #2563eb;
     }
 
     .card-title {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 650;
       color: #0b1e33;
-      margin: 0.5rem 0 0.3rem;
+      margin: 0.4rem 0 0.2rem;
       line-height: 1.3;
     }
 
-    .card-text {
+    .card-desc {
       font-size: 0.9rem;
       color: #334155;
       line-height: 1.5;
@@ -268,97 +276,104 @@
       margin-top: 0.2rem;
     }
 
-    .card-footer {
-      padding: 0.8rem 1.4rem 1.2rem;
-      border-top: 1px solid #edf2f7;
+    .card-actions {
+      padding: 0.6rem 1.4rem 1rem;
+      border-top: 1px solid #f0f4fa;
       display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      font-size: 0.75rem;
+      justify-content: flex-start;
+      gap: 1.2rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .card-actions i {
+      margin-right: 5px;
       color: #94a3b8;
     }
 
-    .card-footer i {
-      margin-right: 4px;
-      color: #94a3b8;
-    }
-
-    /* empty / load more */
-    .load-more {
+    /* footer note */
+    .footer-note {
       text-align: center;
-      padding: 1.5rem 2.5rem 2.5rem;
+      padding: 1.2rem 2rem 2rem;
       color: #64748b;
       border-top: 1px solid #edf2f7;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .load-more i {
-      color: #3b82f6;
+    .footer-note i {
+      color: #2563eb;
+    }
+
+    .footer-note .pill {
+      background: #eef4ff;
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 500;
     }
 
     /* responsive */
-    @media (max-width: 640px) {
-      .header { flex-direction: column; align-items: flex-start; }
-      .stats-mini { flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 700px) {
+      .top-bar { flex-direction: column; align-items: flex-start; padding: 1.2rem 1.5rem; }
+      .meta-links { flex-wrap: wrap; gap: 0.8rem; }
+      .filter-bar { flex-direction: column; align-items: stretch; padding: 0.8rem 1.5rem; }
       .post-grid { grid-template-columns: 1fr; padding: 1.2rem; }
-      .toolbar { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
 <body>
-<div class="dashboard">
-  <!-- header -->
-  <div class="header">
-    <div class="logo-area">
-      <h1><i class="fas fa-bolt"></i> ContentFlow</h1>
+<div class="app">
+  <!-- top -->
+  <div class="top-bar">
+    <div class="brand">
+      <i class="fas fa-bolt"></i>
+      <h1>Pulse</h1>
     </div>
-    <div class="badge-total">
-      <i class="fas fa-layer-group"></i> 100 posts · 2026
+    <div class="stats-pill">
+      <i class="fas fa-layer-group"></i> 100 posts <span>2026</span>
     </div>
-    <div class="stats-mini">
+    <div class="meta-links">
       <span><i class="fas fa-video"></i> 33</span>
       <span><i class="fas fa-image"></i> 34</span>
       <span><i class="fas fa-align-left"></i> 33</span>
     </div>
   </div>
 
-  <!-- toolbar -->
-  <div class="toolbar">
-    <div class="toolbar-left">
-      <i class="fas fa-calendar-alt"></i>
-      <span class="date-range"><i class="far fa-calendar-check"></i> Jan 1 – Jul 11, 2026</span>
-      <span style="color:#94a3b8; margin-left: 4px;">•</span>
-      <span style="font-size:0.85rem; color:#1e293b; font-weight:500;"><i class="far fa-clock"></i> live timestamp</span>
+  <!-- filter -->
+  <div class="filter-bar">
+    <div class="filter-left">
+      <i class="fas fa-calendar-alt" style="color:#64748b;"></i>
+      <span class="date-chip"><i class="far fa-calendar-check"></i> Jan 1 – Jul 11, 2026</span>
+      <span style="color:#b9c7da;">•</span>
+      <span style="font-size:0.8rem; font-weight:500; color:#1e293b;"><i class="far fa-clock"></i> live timestamp</span>
     </div>
-    <div class="view-options">
+    <div class="view-toggle">
       <button class="active"><i class="fas fa-th"></i> Grid</button>
       <button><i class="fas fa-list"></i> List</button>
     </div>
   </div>
 
-  <!-- post grid (100 cards generated by JS) -->
+  <!-- grid container -->
   <div class="post-grid" id="postGrid"></div>
 
-  <!-- footer note -->
-  <div class="load-more">
+  <!-- footer -->
+  <div class="footer-note">
     <i class="fas fa-check-circle" style="color:#22c55e;"></i> 100 posts · daily from Jan 1, 2026
-    <span style="margin-left: 8px; background:#eef2ff; padding:0.1rem 1rem; border-radius:40px; font-size:0.8rem;">
-      <i class="far fa-clock"></i> real-time
-    </span>
+    <span class="pill"><i class="far fa-clock"></i> real-time</span>
   </div>
 </div>
 
 <script>
   (function() {
-    // ----- configuration -----
     const TOTAL_POSTS = 100;
-    const START_DATE = new Date(2026, 0, 1); // Jan 1, 2026
+    const START_DATE = new Date(2026, 0, 1); // Jan 1
 
-    // rich sample content
+    // ----- content pools -----
     const videoTitles = [
       "Morning vlog · city lights", "Tech unboxing · next gen", "Cooking with spices",
       "Fitness routine · full body", "Travel diary · alpine", "Studio session · piano",
@@ -385,162 +400,137 @@
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
     ];
 
-    // helper: random item
     const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-    // helper: generate a date between start and 2026-07-11 (inclusive)
-    function getRandomDate() {
-      const end = new Date(2026, 6, 11); // July 11
+    function randomDate() {
+      const end = new Date(2026, 6, 11);
       const diff = end.getTime() - START_DATE.getTime();
-      const randomDiff = Math.floor(Math.random() * (diff + 1));
-      return new Date(START_DATE.getTime() + randomDiff);
+      return new Date(START_DATE.getTime() + Math.floor(Math.random() * (diff + 1)));
     }
 
-    // format date: "Jan 1, 2026 · 14:30"
     function formatTimestamp(date) {
-      const options = { month: 'short', day: 'numeric', year: 'numeric' };
-      const dateStr = date.toLocaleDateString('en-US', options);
-      const hours = String(date.getHours()).padStart(2, '0');
-      const mins = String(date.getMinutes()).padStart(2, '0');
-      return `${dateStr} · ${hours}:${mins}`;
+      const d = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const h = String(date.getHours()).padStart(2, '0');
+      const m = String(date.getMinutes()).padStart(2, '0');
+      return `${d} · ${h}:${m}`;
     }
 
-    // generate a single post object
-    function generatePost(index) {
-      const typeRand = Math.random();
-      let type, title, mediaHtml, badgeClass, textContent = '';
+    // generate post
+    function generatePost(idx) {
+      const r = Math.random();
+      let type, title, mediaHtml, badgeClass, desc = '';
 
-      const date = getRandomDate();
-      const timestamp = formatTimestamp(date);
+      const date = randomDate();
+      const ts = formatTimestamp(date);
 
-      if (typeRand < 0.33) { // video
+      if (r < 0.33) { // video
         type = 'video';
         title = randomItem(videoTitles);
         badgeClass = 'video';
-        // embed a fake video preview with a play icon overlay (or use a static thumbnail)
-        const videoId = Math.floor(Math.random() * 1000);
-        // use a placeholder image as thumbnail (using picsum)
-        const thumb = `https://picsum.photos/seed/vid${index}/400/250`;
+        const thumb = `https://picsum.photos/seed/vid${idx}/400/250`;
         mediaHtml = `
           <div style="position:relative; width:100%; height:100%; background:#0b1e33;">
-            <img src="${thumb}" alt="video thumbnail" style="width:100%; height:100%; object-fit:cover; opacity:0.9;">
-            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.15);">
-              <i class="fas fa-play-circle" style="color:white; font-size:3.2rem; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5));"></i>
+            <img src="${thumb}" alt="video" style="width:100%; height:100%; object-fit:cover; opacity:0.9;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.1);">
+              <i class="fas fa-play-circle" style="color:white; font-size:3.4rem; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));"></i>
             </div>
           </div>
         `;
-      } else if (typeRand < 0.66) { // photo
+      } else if (r < 0.66) { // photo
         type = 'photo';
         title = randomItem(photoTitles);
         badgeClass = 'photo';
-        const photoId = Math.floor(Math.random() * 200);
-        mediaHtml = `<img src="https://picsum.photos/seed/photo${index}/400/250" alt="photo post" loading="lazy">`;
+        mediaHtml = `<img src="https://picsum.photos/seed/photo${idx}/400/250" alt="photo" loading="lazy">`;
       } else { // text
         type = 'text';
         title = randomItem(textTitles);
         badgeClass = 'text';
-        textContent = randomItem(textBodies);
-        // text-only card : show a subtle icon
-        mediaHtml = `<div style="background:#f1f5f9; display:flex; align-items:center; justify-content:center; height:100%;"><i class="fas fa-quote-right" style="font-size:3rem; color:#94a3b8;"></i></div>`;
+        desc = randomItem(textBodies);
+        mediaHtml = `<div style="background:#f1f5f9; display:flex; align-items:center; justify-content:center; height:100%;"><i class="fas fa-quote-right" style="font-size:3.2rem; color:#94a3b8;"></i></div>`;
       }
 
-      // build card HTML
-      return {
-        type,
-        title,
-        timestamp,
-        badgeClass,
-        mediaHtml,
-        textContent,
-        dateObj: date
-      };
+      return { type, title, ts, badgeClass, mediaHtml, desc, dateObj: date };
     }
 
-    // generate 100 posts
+    // build 100 posts
     const posts = [];
     for (let i = 0; i < TOTAL_POSTS; i++) {
       posts.push(generatePost(i));
     }
 
-    // sort by date (oldest first) – optional, but we keep it realistic
+    // sort oldest → newest (Jan 1 → July 11)
     posts.sort((a, b) => a.dateObj - b.dateObj);
 
-    // render
     const grid = document.getElementById('postGrid');
     grid.innerHTML = '';
 
-    posts.forEach((post, idx) => {
+    posts.forEach((post, index) => {
       const card = document.createElement('div');
       card.className = 'post-card';
 
       // media
-      const mediaDiv = document.createElement('div');
-      mediaDiv.className = 'card-media';
-      mediaDiv.innerHTML = post.mediaHtml;
+      const media = document.createElement('div');
+      media.className = 'media-box';
+      media.innerHTML = post.mediaHtml;
 
-      // content
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'card-content';
+      // body
+      const body = document.createElement('div');
+      body.className = 'card-body';
 
-      // meta row: type badge + timestamp
-      const metaDiv = document.createElement('div');
-      metaDiv.className = 'card-meta';
-      metaDiv.innerHTML = `
-        <span class="post-type-badge ${post.badgeClass}">${post.type}</span>
-        <span class="timestamp"><i class="far fa-clock"></i> ${post.timestamp}</span>
+      const head = document.createElement('div');
+      head.className = 'card-head';
+      head.innerHTML = `
+        <span class="type-badge ${post.badgeClass}">${post.type}</span>
+        <span class="time-stamp"><i class="far fa-clock"></i> ${post.ts}</span>
       `;
 
-      // title
       const titleEl = document.createElement('div');
       titleEl.className = 'card-title';
       titleEl.textContent = post.title;
 
-      // text body (only if text type)
-      const textEl = document.createElement('div');
-      textEl.className = 'card-text';
+      const descEl = document.createElement('div');
+      descEl.className = 'card-desc';
       if (post.type === 'text') {
-        textEl.textContent = post.textContent;
+        descEl.textContent = post.desc;
       } else {
-        // for video/photo show a short placeholder description
-        textEl.textContent = post.type === 'video' ? '🎬 Watch the full video' : '📸 Photo of the day';
+        descEl.textContent = post.type === 'video' ? '🎬 Watch the full video' : '📸 Photo of the day';
       }
 
-      contentDiv.appendChild(metaDiv);
-      contentDiv.appendChild(titleEl);
-      contentDiv.appendChild(textEl);
+      body.appendChild(head);
+      body.appendChild(titleEl);
+      body.appendChild(descEl);
 
-      // footer (extra meta)
-      const footer = document.createElement('div');
-      footer.className = 'card-footer';
-      footer.innerHTML = `
-        <span><i class="far fa-heart"></i> ${Math.floor(Math.random() * 80 + 10)}</span>
-        <span><i class="far fa-comment"></i> ${Math.floor(Math.random() * 20 + 2)}</span>
+      // actions
+      const actions = document.createElement('div');
+      actions.className = 'card-actions';
+      actions.innerHTML = `
+        <span><i class="far fa-heart"></i> ${Math.floor(Math.random() * 70 + 15)}</span>
+        <span><i class="far fa-comment"></i> ${Math.floor(Math.random() * 18 + 3)}</span>
         <span><i class="fas fa-share-alt"></i></span>
       `;
 
-      card.appendChild(mediaDiv);
-      card.appendChild(contentDiv);
-      card.appendChild(footer);
+      card.appendChild(media);
+      card.appendChild(body);
+      card.appendChild(actions);
       grid.appendChild(card);
     });
 
-    // update stats-mini counts (just for fun)
-    const videoCount = posts.filter(p => p.type === 'video').length;
-    const photoCount = posts.filter(p => p.type === 'photo').length;
-    const textCount = posts.filter(p => p.type === 'text').length;
-    const statsSpans = document.querySelectorAll('.stats-mini span');
-    if (statsSpans.length >= 3) {
-      statsSpans[0].innerHTML = `<i class="fas fa-video"></i> ${videoCount}`;
-      statsSpans[1].innerHTML = `<i class="fas fa-image"></i> ${photoCount}`;
-      statsSpans[2].innerHTML = `<i class="fas fa-align-left"></i> ${textCount}`;
+    // update stat numbers
+    const v = posts.filter(p => p.type === 'video').length;
+    const ph = posts.filter(p => p.type === 'photo').length;
+    const t = posts.filter(p => p.type === 'text').length;
+    const metaSpans = document.querySelectorAll('.meta-links span');
+    if (metaSpans.length >= 3) {
+      metaSpans[0].innerHTML = `<i class="fas fa-video"></i> ${v}`;
+      metaSpans[1].innerHTML = `<i class="fas fa-image"></i> ${ph}`;
+      metaSpans[2].innerHTML = `<i class="fas fa-align-left"></i> ${t}`;
     }
 
-    // optional: view toggle (demo only)
-    document.querySelectorAll('.view-options button').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        document.querySelectorAll('.view-options button').forEach(b => b.classList.remove('active'));
+    // view toggle (demo)
+    document.querySelectorAll('.view-toggle button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        // grid/list mock: just visual feedback
         if (this.textContent.includes('List')) {
           grid.style.gridTemplateColumns = '1fr';
         } else {
@@ -549,7 +539,7 @@
       });
     });
 
-    console.log('✅ 100 posts rendered with timestamps from Jan 1, 2026');
+    console.log('✅ 100 posts · timestamps from Jan 1, 2026');
   })();
 </script>
 </body>
