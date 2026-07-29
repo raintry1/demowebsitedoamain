@@ -1,20 +1,577 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-        <title>welcomd</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rain | Cybersecurity Portfolio & Resume</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0d14;
+      --bg-card: #121824;
+      --bg-card-hover: #192233;
+      --border-color: #1f293d;
+      --accent-green: #00ffaa;
+      --accent-green-dim: rgba(0, 255, 170, 0.12);
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-mono: 'Fira Code', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 1.5rem;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 255, 170, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.05) 0%, transparent 40%);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    /* Hero / Header Card */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      margin-bottom: 2rem;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-green);
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(0, 255, 170, 0.3);
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: var(--bg-dark);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title span {
+      color: var(--accent-green);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      color: var(--accent-blue);
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-bio {
+      max-width: 680px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-family: var(--font-mono);
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--accent-green-dim);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      transform: translateY(-2px);
+    }
+
+    /* Main Grid Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 850px) {
+      .main-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+    }
+
+    .section-title i {
+      color: var(--accent-green);
+    }
+
+    /* Pathway Boxes */
+    .pathway-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .pathway-box.completed {
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .pathway-box.in-progress {
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .pathway-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pathway-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .badge-status {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-status.completed {
+      background: var(--accent-green-dim);
+      color: var(--accent-green);
+    }
+
+    .badge-status.in-progress {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+    }
+
+    .pathway-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+    }
+
+    /* Skills Grid */
+    .skill-category {
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-cat-name {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-pill {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    /* Projects */
+    .project-item {
+      padding: 1.1rem;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .project-item:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .project-title {
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .timeline-sub {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .stats-img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-    <h1 style="text-align: center; color: aquamarine;">login page</h1>
-<div style="text-align: center;">
-    <label for="username" style="text-align: center; color: blueviolet;">username</label>
-<input style="text-align: center;" stype="text"  >
-</div>
-<br>
-<div style="text-align: center; color: red;">
-    <label password="password" style="text-align: center;">password</label>
-<input type="password">
-</div>
-<br>
-<div style="text-align: center;">
-<button type="submit" style="color: blue;" >submit</button>
-</div>
+
+  <div class="container">
+    
+    <!-- Hero / Top Resume Header -->
+    <div class="hero-card">
+      <div class="avatar-wrapper">
+        <img src="https://github.com/raintry1.png" alt="Rain's Profile Picture" class="avatar">
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          <span>Available</span>
+        </div>
+      </div>
+      
+      <h1 class="hero-title">Rain <span>[raintry1]</span></h1>
+      <p class="hero-subtitle">⚡ Diploma CE | Cyber Security 101 | eJPT Aspirant</p>
+      
+      <p class="hero-bio">
+        Computer Engineering student passionate about penetration testing, network security, and custom tooling. Active TryHackMe player with <strong>50+ labs cleared</strong>, currently pursuing the Cyber Security 101 & eJPT path.
+      </p>
+
+      <div class="social-links">
+        <a href="mailto:raintry1@protone.me" class="social-btn"><i class="fa-solid fa-envelope"></i> ProtonMail</a>
+        <a href="https://github.com/raintry1" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://tryhackme.com/p/raintry1" target="_blank" class="social-btn"><i class="fa-solid fa-shield-halved"></i> TryHackMe</a>
+        <a href="https://www.instagram.com/rain.123.13" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      </div>
+    </div>
+
+    <!-- Main Section Grid -->
+    <div class="main-grid">
+      
+      <!-- Left / Main Column -->
+      <div class="col-main">
+        
+        <!-- TryHackMe & Cybersecurity Pathways -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-award"></i> Cybersecurity & THM Pathways</h2>
+          
+          <div class="pathway-box completed">
+            <div class="pathway-header">
+              <span class="pathway-title">Pre-Security Pathway</span>
+              <span class="badge-status completed">Completed ✔</span>
+            </div>
+            <p class="pathway-desc">
+              Gained core knowledge in network structures, OSI model, HTTP request/response flows, Linux CLI navigation, and defensive infrastructure.
+            </p>
+            <div class="tags">
+              <span class="tag">OSI Model</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Linux CLI</span>
+              <span class="tag">Web Mechanics</span>
+            </div>
+          </div>
+
+          <div class="pathway-box in-progress">
+            <div class="pathway-header">
+              <span class="pathway-title">Cyber Security 101 & eJPT Track</span>
+              <span class="badge-status in-progress">In Progress (50+ Rooms) ⏳</span>
+            </div>
+            <p class="pathway-desc">
+              Actively solving hands-on rooms involving port scanning with Nmap, vulnerability exploitation using Metasploit, packet analysis with Wireshark, SQL injection, and privilege escalation.
+            </p>
+            <div class="tags">
+              <span class="tag">Nmap</span>
+              <span class="tag">Metasploit</span>
+              <span class="tag">Wireshark</span>
+              <span class="tag">Burp Suite</span>
+              <span class="tag">PrivEsc</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Stack -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-laptop-code"></i> Technical Stack & Tools</h2>
+          
+          <div class="skill-category">
+            <div class="skill-cat-name">// Programming & Automation</div>
+            <div class="tech-badges">
+              <div class="tech-pill"><i class="fa-brands fa-python" style="color: #3776AB;"></i> Python 3</div>
+              <div class="tech-pill"><i class="fa-solid fa-terminal" style="color: #4EAA25;"></i> Bash Scripting</div>
+              <div class="tech-pill"><i class="fa-brands fa-js" style="color: #F7DF1E;"></i> JavaScript</div>
+              <div class="tech-pill"><i class="fa-brands fa-html5" style="color: #E34F26;"></i> HTML5 / CSS3</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-cat-name">// Penetration Testing & Recon</div>
+            <div class="tech-badges">
+              <div class="tech-pill"><i class="fa-solid fa-user-ninja"></i> Kali Linux</div>
+              <div class="tech-pill"><i class="fa-solid fa-network-wired"></i> Nmap</div>
+              <div class="tech-pill"><i class="fa-solid fa-bug"></i> Metasploit</div>
+              <div class="tech-pill"><i class="fa-solid fa-globe"></i> Burp Suite</div>
+              <div class="tech-pill"><i class="fa-solid fa-chart-line"></i> Wireshark</div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-cat-name">// Environments & Deployment</div>
+            <div class="tech-badges">
+              <div class="tech-pill"><i class="fa-brands fa-linux"></i> Linux (Kali, Ubuntu)</div>
+              <div class="tech-pill"><i class="fa-brands fa-windows"></i> Windows Systems</div>
+              <div class="tech-pill"><i class="fa-brands fa-android"></i> Android Rooting & Custom ROMs</div>
+              <div class="tech-pill"><i class="fa-solid fa-cloud"></i> Vercel / Netlify</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> Featured Projects</h2>
+          
+          <div class="project-item">
+            <div class="project-title"><i class="fa-brands fa-whatsapp"></i> Custom WhatsApp Automation Bots</div>
+            <p class="project-desc">High-volume API handlers for interactive response flows and business communication workflows.</p>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title"><i class="fa-solid fa-magnifying-glass"></i> Serverless OSINT Lookup APIs</div>
+            <p class="project-desc">Lightweight lookup endpoints deployed on Vercel/Netlify for fast information gathering.</p>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title"><i class="fa-solid fa-key"></i> Security & Profiling Scripts</div>
+            <p class="project-desc">Python tools built for wordlist generation, password profiling, and initial reconnaissance tasks.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column / Sidebar -->
+      <div class="col-side">
+        
+        <!-- Education -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">Diploma in Computer Engineering</div>
+              <div class="timeline-sub">Gujarat Technological University</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub Metrics -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-chart-simple"></i> GitHub Stats</h2>
+          <img src="https://github-readme-stats.vercel.app/api?username=raintry1&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" class="stats-img">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raintry1&layout=compact&theme=radical&hide_border=true" alt="Top Languages" class="stats-img">
+        </div>
+
+        <!-- Highlights -->
+        <div class="card">
+          <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> Quick Highlights</h2>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; line-height: 1.9;">
+            <li>⚡ <strong>Focus:</strong> Cyber Security 101 & eJPT</li>
+            <li>🐧 <strong>OS:</strong> Daily Kali / Custom Linux</li>
+            <li>🚀 <strong>THM:</strong> 50+ Rooms Solved</li>
+            <li>☕ <strong>Motto:</strong> Learn. Build. Break. Fix.</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>"Consistency beats intensity — Code, break, fix & repeat daily."</p>
+      <p style="margin-top: 6px; color: var(--accent-green);">© Rain (raintry1) • Portfolio & Resume</p>
+    </footer>
+
+  </div>
+
 </body>
+</html>
